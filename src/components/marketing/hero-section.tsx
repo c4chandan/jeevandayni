@@ -13,10 +13,11 @@ import {
   Star,
   Sparkles,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { HERO_STATS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 function AnimatedCounter({ target, suffix = "" }: { target: string; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -177,22 +178,24 @@ export default function HeroSection() {
               variants={itemVariants}
               className="flex flex-wrap items-center gap-4"
             >
-              <Link href="/register">
-                <Button
-                  size="lg"
-                  className="bg-brand-primary hover:bg-brand-primary-dark text-white font-semibold text-base px-8 h-13 rounded-xl shadow-2xl shadow-brand-primary/30 hover:shadow-brand-primary/50 transition-all group"
-                >
-                  Start Your Journey
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+              <Link
+                href="/register"
+                className={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "bg-brand-primary hover:bg-brand-primary-dark text-white font-semibold text-base px-8 h-13 rounded-xl shadow-2xl shadow-brand-primary/30 hover:shadow-brand-primary/50 transition-all group flex items-center justify-center"
+                )}
+              >
+                Start Your Journey
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <Link href="/products">
-                <Button
-                  size="lg"
-                  className="bg-transparent border border-white/30 text-white hover:bg-white hover:text-brand-dark font-semibold text-base px-8 h-13 rounded-xl backdrop-blur-sm transition-all duration-300"
-                >
-                  Explore Products
-                </Button>
+              <Link
+                href="/products"
+                className={cn(
+                  buttonVariants({ variant: "ghost", size: "lg" }),
+                  "bg-transparent border border-white/30 text-white hover:bg-white hover:text-brand-dark font-semibold text-base px-8 h-13 rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center"
+                )}
+              >
+                Explore Products
               </Link>
               <button className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
                 <span className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">

@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Calculator, TrendingUp, IndianRupee, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { INCOME_TIERS } from "@/lib/constants";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function IncomeCalculator() {
   const [referrals, setReferrals] = useState(10);
@@ -146,10 +147,14 @@ export default function IncomeCalculator() {
               </div>
             </div>
 
-            <Link href="/register" className="block mt-6">
-              <Button className="w-full bg-brand-primary hover:bg-brand-primary-dark text-white font-semibold h-12 rounded-xl shadow-lg shadow-brand-primary/25">
-                Start Earning Today
-              </Button>
+            <Link
+              href="/register"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "w-full bg-brand-primary hover:bg-brand-primary-dark text-white font-semibold h-12 rounded-xl shadow-lg shadow-brand-primary/25 text-center flex items-center justify-center mt-6"
+              )}
+            >
+              Start Earning Today
             </Link>
           </motion.div>
 

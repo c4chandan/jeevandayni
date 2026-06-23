@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import { Building2, MapPin, ArrowRight, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FRANCHISE_TIERS } from "@/lib/constants";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function FranchiseSection() {
   return (
@@ -104,17 +105,18 @@ export default function FranchiseSection() {
                   </li>
                 </ul>
 
-                <Link href="/franchise" className="block">
-                  <Button
-                    className={`w-full font-semibold rounded-xl ${
-                      i === 2
-                        ? "bg-brand-accent hover:bg-brand-accent/90 text-brand-dark shadow-lg shadow-brand-accent/25"
-                        : "bg-brand-primary/10 text-brand-primary hover:bg-brand-primary hover:text-white"
-                    } transition-all`}
-                  >
-                    Apply Now
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
+                <Link
+                  href="/franchise"
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "w-full font-semibold rounded-xl text-center flex items-center justify-center h-10 mt-4",
+                    i === 2
+                      ? "bg-brand-accent hover:bg-brand-accent/90 text-brand-dark shadow-lg shadow-brand-accent/25"
+                      : "bg-brand-primary/10 text-brand-primary hover:bg-brand-primary hover:text-white"
+                  )}
+                >
+                  Apply Now
+                  <ArrowRight className="w-4 h-4 ml-1" />
                 </Link>
               </div>
             </motion.div>

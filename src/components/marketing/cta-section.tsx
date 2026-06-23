@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Users } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function CtaSection() {
   return (
@@ -55,23 +56,25 @@ export default function CtaSection() {
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Link href="/register">
-              <Button
-                size="lg"
-                className="bg-white text-brand-dark hover:bg-white/90 font-bold text-base px-8 h-14 rounded-xl shadow-2xl group"
-              >
-                <Sparkles className="w-5 h-5 mr-2 text-brand-accent" />
-                Start Your Journey
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
+            <Link
+              href="/register"
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "bg-white text-brand-dark hover:bg-white/90 font-bold text-base px-8 h-14 rounded-xl shadow-2xl group flex items-center justify-center"
+              )}
+            >
+              <Sparkles className="w-5 h-5 mr-2 text-brand-accent" />
+              Start Your Journey
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link href="/franchise">
-              <Button
-                size="lg"
-                className="bg-transparent border border-white/30 text-white hover:bg-white hover:text-brand-dark font-bold text-base px-8 h-14 rounded-xl backdrop-blur-sm transition-all duration-300"
-              >
-                Explore Franchise
-              </Button>
+            <Link
+              href="/franchise"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "lg" }),
+                "bg-transparent border border-white/30 text-white hover:bg-white hover:text-brand-dark font-bold text-base px-8 h-14 rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center"
+              )}
+            >
+              Explore Franchise
             </Link>
           </div>
 

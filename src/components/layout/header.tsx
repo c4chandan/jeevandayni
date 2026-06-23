@@ -9,9 +9,10 @@ import {
   ChevronDown,
   Leaf,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { MAIN_NAV } from "@/lib/constants";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const pathname = usePathname();
@@ -110,28 +111,27 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/login">
-              <Button
-                variant="ghost"
-                size="sm"
-                className={`font-medium transition-colors ${
-                  (scrolled || !isHome)
-                    ? "text-foreground/85 hover:text-brand-primary hover:bg-brand-primary/10"
-                    : "text-white/85 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                Sign In
-              </Button>
+            <Link
+              href="/login"
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "sm" }),
+                "font-medium transition-colors flex items-center justify-center",
+                (scrolled || !isHome)
+                  ? "text-foreground/85 hover:text-brand-primary hover:bg-brand-primary/10"
+                  : "text-white/85 hover:text-white hover:bg-white/10"
+              )}
+            >
+              Sign In
             </Link>
-            <Link href="/register">
-              <Button
-                size="sm"
-                className="bg-brand-primary hover:bg-brand-primary-dark text-white font-medium shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 transition-all"
-              >
-                Start Your Journey
-              </Button>
+            <Link
+              href="/register"
+              className={cn(
+                buttonVariants({ variant: "default", size: "sm" }),
+                "bg-brand-primary hover:bg-brand-primary-dark text-white font-medium shadow-lg shadow-brand-primary/25 hover:shadow-brand-primary/40 transition-all flex items-center justify-center"
+              )}
+            >
+              Start Your Journey
             </Link>
           </div>
 
@@ -192,17 +192,24 @@ export default function Header() {
                   ))}
                 </nav>
 
-                {/* Mobile CTAs */}
                 <div className="p-6 border-t border-border space-y-3">
-                  <Link href="/login" className="block">
-                    <Button variant="outline" className="w-full font-medium">
-                      Sign In
-                    </Button>
+                  <Link
+                    href="/login"
+                    className={cn(
+                      buttonVariants({ variant: "outline" }),
+                      "w-full font-medium flex items-center justify-center"
+                    )}
+                  >
+                    Sign In
                   </Link>
-                  <Link href="/register" className="block">
-                    <Button className="w-full bg-brand-primary hover:bg-brand-primary-dark text-white font-medium">
-                      Start Your Journey
-                    </Button>
+                  <Link
+                    href="/register"
+                    className={cn(
+                      buttonVariants({ variant: "default" }),
+                      "w-full bg-brand-primary hover:bg-brand-primary-dark text-white font-medium flex items-center justify-center"
+                    )}
+                  >
+                    Start Your Journey
                   </Link>
                 </div>
               </div>
