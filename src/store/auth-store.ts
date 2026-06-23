@@ -32,13 +32,40 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const credentials = emailOrMobile.toLowerCase();
+      let role: "user" | "admin" | "franchise" = "user";
+      let name = "Devendra Verma";
+      let email = "devendra@example.com";
+
+      if (credentials === "admin" || credentials === "admin@jeevandayni.com") {
+        if (password && password !== "admin123") {
+          throw new Error("Invalid password for Admin account.");
+        }
+        role = "admin";
+        name = "Chandan Kumar (Admin)";
+        email = "admin@jeevandayni.com";
+      } else if (credentials === "franchise" || credentials === "franchise@jeevandayni.com") {
+        if (password && password !== "franchise123") {
+          throw new Error("Invalid password for Franchise account.");
+        }
+        role = "franchise";
+        name = "Karan Singh (Franchise)";
+        email = "franchise@jeevandayni.com";
+      } else {
+        if (credentials === "user" || credentials === "user@jeevandayni.com") {
+          if (password && password !== "user123") {
+            throw new Error("Invalid password for User account.");
+          }
+        }
+      }
       
       const mockUser: User = {
-        id: "usr_1",
-        name: "Devendra Verma",
-        email: "devendra@example.com",
+        id: role === "admin" ? "adm_1" : role === "franchise" ? "frc_1" : "usr_1",
+        name,
+        email,
         mobile: "9876543210",
-        role: "user",
+        role,
         status: "active",
         rank: mockRank,
         sponsorId: "sponsor_123",

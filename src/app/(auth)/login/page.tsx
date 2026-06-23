@@ -29,7 +29,14 @@ export default function LoginPage() {
 
     const success = await login(emailOrMobile, password);
     if (success) {
-      router.push("/dashboard");
+      const freshUser = useAuthStore.getState().user;
+      if (freshUser?.role === "admin" || freshUser?.role === "super_admin") {
+        router.push("/admin");
+      } else if (freshUser?.role === "franchise") {
+        router.push("/franchise-portal");
+      } else {
+        router.push("/dashboard");
+      }
     } else {
       setLoginError("Invalid username or password.");
     }
