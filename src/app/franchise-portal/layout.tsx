@@ -13,9 +13,12 @@ import {
   Loader2,
   Bell,
   User,
+  Menu,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 const franchiseLinks = [
   { label: "Overview", href: "/franchise-portal", icon: LayoutDashboard },
@@ -54,7 +57,7 @@ export default function FranchiseLayout({
   return (
     <div className="flex bg-background min-h-screen">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-border bg-card flex flex-col h-screen sticky top-0">
+      <aside className="w-64 border-r border-border bg-card flex flex-col h-screen sticky top-0 hidden lg:flex shrink-0">
         <div className="p-6 border-b border-border">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-accent to-brand-primary flex items-center justify-center shadow-md">
@@ -116,9 +119,64 @@ export default function FranchiseLayout({
       {/* Main Container */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Header */}
-        <header className="h-16 border-b border-border bg-card flex items-center justify-between px-8 sticky top-0 z-40">
-          <div className="text-sm font-semibold text-foreground">
-            Franchise Outlet Portal
+        <header className="h-16 border-b border-border bg-card flex items-center justify-between px-4 sm:px-8 sticky top-0 z-40">
+          <div className="flex items-center gap-3">
+            <Sheet>
+              <SheetTrigger render={
+                <Button variant="ghost" size="icon" className="rounded-xl lg:hidden">
+                  <Menu className="w-5 h-5 text-foreground" />
+                </Button>
+              } />
+              <SheetContent side="left" className="w-64 p-0">
+                <div className="flex flex-col h-full bg-card">
+                  <div className="p-6 border-b border-border">
+                    <Link href="/" className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-accent to-brand-primary flex items-center justify-center shadow-md">
+                        <Leaf className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-base font-bold font-heading text-foreground">
+                        Jeevandayni
+                      </span>
+                    </Link>
+                  </div>
+
+                  <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+                    {franchiseLinks.map((link) => {
+                      const Icon = link.icon;
+                      const isActive = pathname === link.href;
+                      return (
+                        <Link
+                          key={link.label}
+                          href={link.href}
+                          className={cn(
+                            "flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-xl transition-all",
+                            isActive
+                              ? "bg-brand-accent/10 text-brand-accent"
+                              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                          )}
+                        >
+                          <Icon className={cn("w-5 h-5", isActive ? "text-brand-accent" : "text-muted-foreground")} />
+                          {link.label}
+                        </Link>
+                      );
+                    })}
+                  </nav>
+
+                  <div className="p-4 border-t border-border bg-muted/30">
+                    <Button
+                      variant="ghost"
+                      onClick={logout}
+                      className="w-full text-destructive hover:bg-destructive/10 hover:text-destructive py-5 rounded-xl text-sm font-medium flex items-center justify-center gap-2"
+                    >
+                      <LogOut className="w-4.5 h-4.5" /> Logout
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+            <div className="text-sm font-semibold text-foreground truncate max-w-[150px] sm:max-w-none">
+              Franchise Outlet Portal
+            </div>
           </div>
           <div className="flex items-center gap-4 ml-auto">
             <Button variant="ghost" size="icon" className="relative rounded-xl">
@@ -130,6 +188,7 @@ export default function FranchiseLayout({
             </Button>
           </div>
         </header>
+
 
         {/* Content */}
         <main className="flex-1 p-8 overflow-y-auto">{children}</main>

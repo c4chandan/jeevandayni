@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const sidebarLinks = [
+export const sidebarLinks = [
   { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
   { label: "Wallet", href: "/dashboard/wallet", icon: Wallet },
   { label: "My Team", href: "/dashboard/team", icon: Users },
@@ -31,7 +31,7 @@ export default function DashboardSidebar() {
   const { user, logout } = useAuthStore();
 
   return (
-    <aside className="w-64 border-r border-border bg-card flex flex-col h-screen sticky top-0">
+    <aside className="w-64 border-r border-border bg-card flex flex-col h-screen sticky top-0 hidden lg:flex shrink-0">
       {/* Brand Logo */}
       <div className="p-6 border-b border-border">
         <Link href="/" className="flex items-center gap-2.5 group">
